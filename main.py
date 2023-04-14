@@ -38,6 +38,7 @@ def run():
     add_to_all_time_playlist(client, dw_uris, config["ALL_DISCOVERED_PLAYLIST_ID"])
 
     logger.info("Adding to the weekly archive")
+    print("username", config["USERNAME"])
     add_to_weekly_archive(client, config["USERNAME"], playlist_date, dw_uris)
 
     logger.info("Done discover weekly archiving")
@@ -130,7 +131,7 @@ def add_to_weekly_archive(client, username, playlist_date, dw_uris):
         return
 
     logger.info(f"Creating this week's archive playlist: {this_weeks_playlist}")
-    print("username", username)
+    # print("username", username)
     saved_playlist = client.user_playlist_create(
         username, this_weeks_playlist, public=False
     )
