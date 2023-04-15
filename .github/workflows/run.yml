@@ -31,6 +31,7 @@ jobs:
           REDIRECT_URI: ${{ secrets.REDIRECT_URI }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           USERNAME: ${{ secrets.USERNAME }}
+          USER_ID: ${{ secrets.USER_ID }}
           DISCOVER_WEEKLY_PLAYLIST_ID: ${{ secrets.DISCOVER_WEEKLY_PLAYLIST_ID }}
           ALL_DISCOVERED_PLAYLIST_ID: ${{ secrets.ALL_DISCOVERED_PLAYLIST_ID }}
         run: |
