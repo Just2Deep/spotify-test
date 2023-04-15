@@ -48,8 +48,9 @@ def load_client(client_id, client_secret, redirect_uri, username, refresh_token)
         "playlist-read-private",
         "playlist-modify-private",
         "user-follow-read",
-        "app-remote-control",
+        "user-top-read",
         "playlist-modify-public",
+        "user-library-read",
     ]
     # Authenticate
     auth_manager = SpotifyOAuth(
