@@ -38,8 +38,7 @@ def run():
     add_to_all_time_playlist(client, dw_uris, config["ALL_DISCOVERED_PLAYLIST_ID"])
 
     logger.info("Adding to the weekly archive")
-    print("username", config["USERNAME"])
-    add_to_weekly_archive(client, config["USERNAME"], playlist_date, dw_uris)
+    add_to_weekly_archive(client, config["USER_ID"], playlist_date, dw_uris)
 
     logger.info("Done discover weekly archiving")
 
@@ -94,7 +93,6 @@ def add_to_all_time_playlist(client, dw_uris, all_discovered_playlist_id):
         ]
     )
 
-    # print(last_five)
     if match:
         logger.info(
             "This script has already been run for this week."
@@ -105,7 +103,7 @@ def add_to_all_time_playlist(client, dw_uris, all_discovered_playlist_id):
     client.playlist_add_items(all_discovered_playlist_id, dw_uris)
 
 
-def add_to_weekly_archive(client, username, playlist_date, dw_uris):
+def add_to_weekly_archive(client, user_id, playlist_date, dw_uris):
     # Second, create the weekly archive playlist
     this_weeks_playlist = f"Discovered Week {playlist_date}"
 
@@ -116,7 +114,7 @@ def add_to_weekly_archive(client, username, playlist_date, dw_uris):
     found = False
 
     while offset + limit < total and not found:
-        playlists = client.user_playlists(username, limit=limit, offset=offset)
+        playlists = client.current_user_playlists(limit=limit, offset=offset)
         total = playlists["total"]
         found = any(
             [item["name"] == this_weeks_playlist for item in playlists["items"]]
@@ -131,10 +129,11 @@ def add_to_weekly_archive(client, username, playlist_date, dw_uris):
         return
 
     logger.info(f"Creating this week's archive playlist: {this_weeks_playlist}")
-    # print("username", username)
     saved_playlist = client.user_playlist_create(
-        username, this_weeks_playlist, public=False
+        user_id, this_weeks_playlist, public=False
     )
+
+    print(saved_playlist, "saved_playlist")
     client.playlist_add_items(saved_playlist["id"], dw_uris)
     logger.info("Done creating this week's archive playlist.")
 
