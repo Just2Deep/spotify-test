@@ -317,7 +317,7 @@ test = ["pytest"]
 
 [[package]]
 name = "urllib3"
-version = "^1.26"
+version = "2.0.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 category = "main"
 optional = false
