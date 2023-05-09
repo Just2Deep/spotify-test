@@ -19,7 +19,7 @@ name = "backcall"
 version = "0.2.0"
 description = "Specifications for callback functions passed in to an API"
 category = "dev"
-optional = false
+optional = true
 python-versions = "*"
 
 [[package]]
