@@ -19,7 +19,7 @@ handler = logging.handlers.RotatingFileHandler(
 )
 handler.setFormatter(logging.Formatter(fmt="%(asctime)s : %(levelname)s : %(message)s"))
 logger.addHandler(handler)
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 
 
 def run():
