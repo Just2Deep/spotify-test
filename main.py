@@ -11,7 +11,12 @@ import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 
 logger = logging.getLogger("spotify-songs")
-handler = logging.StreamHandler(stream=sys.stdout)
+handler = logging.handlers.RotatingFileHandler(
+    "stotify.log",
+    maxBytes=1024 * 1024,
+    backupCount=1,
+    encoding="utf8",
+)
 handler.setFormatter(logging.Formatter(fmt="%(asctime)s : %(levelname)s : %(message)s"))
 logger.addHandler(handler)
 logger.setLevel(logging.INFO)
