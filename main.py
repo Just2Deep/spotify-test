@@ -3,6 +3,7 @@ Fetching data from spotify every week and updating it automatically.
 """
 import datetime as dt
 import logging
+from logging.handlers import RotatingFileHandler
 import os
 import sys
 
@@ -49,6 +50,7 @@ def run():
 
 
 def load_client(client_id, client_secret, redirect_uri, username, refresh_token):
+    # sourcery skip: inline-immediately-returned-variable
     scopes = [
         "playlist-read-private",
         "playlist-modify-private",
@@ -93,10 +95,8 @@ def add_to_all_time_playlist(client, dw_uris, all_discovered_playlist_id):
     # If the last 5 tracks match the last 5 from the current week, then we've already added
     # this week's playlist.
     match = len(last_five["items"]) >= 5 and all(
-        [
-            dw_uri == item["track"]["uri"]
-            for dw_uri, item in zip(dw_uris[-5:], last_five["items"])
-        ]
+        dw_uri == item["track"]["uri"]
+        for dw_uri, item in zip(dw_uris[-5:], last_five["items"])
     )
 
     if match:
@@ -122,9 +122,7 @@ def add_to_weekly_archive(client, user_id, playlist_date, dw_uris):
     while offset + limit < total and not found:
         playlists = client.current_user_playlists(limit=limit, offset=offset)
         total = playlists["total"]
-        found = any(
-            [item["name"] == this_weeks_playlist for item in playlists["items"]]
-        )
+        found = any(item["name"] == this_weeks_playlist for item in playlists["items"])
         offset += limit
 
     if found:

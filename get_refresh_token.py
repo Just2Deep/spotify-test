@@ -40,7 +40,7 @@ with warnings.catch_warnings():
     access_token = auth_manager.get_access_token(response_code)
 
 print(f"Your refresh token is:\n\n{access_token['refresh_token']}\n")
-print(f"Store this as the REFRESH_TOKEN in your environment variables")
+print("Store this as the REFRESH_TOKEN in your environment variables")
 
 if redirect_server is not None:
     redirect_server.terminate()
