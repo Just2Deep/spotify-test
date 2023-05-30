@@ -13,7 +13,7 @@ from spotipy.oauth2 import SpotifyOAuth
 
 logger = logging.getLogger("spotify-songs")
 handler = logging.handlers.RotatingFileHandler(
-    "stotify.log",
+    "spotify.log",
     maxBytes=1024 * 1024,
     backupCount=1,
     encoding="utf8",
